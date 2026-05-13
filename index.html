@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Roid Pérez — Portafolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0e0e0e;
+      --surface: #161616;
+      --accent: #c8f04d;
+      --text: #f0ede6;
+      --muted: #888;
+      --serif: 'DM Serif Display', Georgia, serif;
+      --sans: 'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.4rem 4rem;
+      background: rgba(14,14,14,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid #1f1f1f;
+    }
+
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 8rem 4rem 4rem;
+      gap: 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(200,240,77,0.12) 0%, transparent 70%);
+      top: 10%; right: -100px;
+      border-radius: 50%;
+      animation: pulse 6s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.8; }
+      50% { transform: scale(1.1); opacity: 1; }
+    }
+
+    .hero-text { animation: fadeUp 0.9s ease both; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      line-height: 1.05;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 em { font-style: italic; color: var(--accent); }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: var(--muted);
+      max-width: 420px;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .btn {
+      display: inline-block;
+      padding: 0.85rem 2rem;
+      border-radius: 2px;
+      font-size: 0.85rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary { background: var(--accent); color: #0e0e0e; font-weight: 500; }
+    .btn-primary:hover { background: #d8ff5a; }
+    .btn-outline { background: transparent; color: var(--text); border: 1px solid #333; }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    .hero-photo {
+      display: flex; justify-content: center; align-items: center;
+      animation: fadeUp 0.9s 0.2s ease both;
+    }
+
+    .photo-frame {
+      width: 340px; height: 420px;
+      border: 1px solid #2a2a2a;
+      border-radius: 4px;
+      background: var(--surface);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 1rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .photo-frame::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(200,240,77,0.05) 0%, transparent 60%);
+    }
+
+    .photo-icon {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: #222;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem;
+      border: 2px solid #2a2a2a;
+    }
+
+    .photo-hint { font-size: 0.75rem; color: #444; text-align: center; padding: 0 2rem; }
+
+    section { padding: 6rem 4rem; }
+
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.1;
+      margin-bottom: 3rem;
+    }
+
+    .about { background: var(--surface); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .about-text p { color: var(--muted); line-height: 1.8; margin-bottom: 1.25rem; }
+
+    .skills-list { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+    .skill-item {
+      padding: 1rem 1.25rem;
+      border: 1px solid #2a2a2a;
+      border-radius: 2px;
+      background: var(--bg);
+      transition: border-color 0.2s;
+    }
+
+    .skill-item:hover { border-color: var(--accent); }
+    .skill-name { font-size: 0.85rem; font-weight: 500; margin-bottom: 0.3rem; }
+    .skill-level { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.08em; }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background: var(--surface);
+      border: 1px solid #1f1f1f;
+      border-radius: 4px;
+      overflow: hidden;
+      transition: border-color 0.2s, transform 0.3s;
+    }
+
+    .project-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+
+    .project-thumb {
+      height: 180px;
+      background: linear-gradient(135deg, #1a1a1a 0%, #222 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.5rem;
+      border-bottom: 1px solid #1f1f1f;
+    }
+
+    .project-body { padding: 1.5rem; }
+
+    .project-tag {
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .project-title { font-family: var(--serif); font-size: 1.3rem; margin-bottom: 0.75rem; }
+
+    .project-desc { font-size: 0.875rem; color: var(--muted); line-height: 1.65; margin-bottom: 1.25rem; }
+
+    .project-link {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .project-link:hover { text-decoration: underline; }
+
+    .contact { background: var(--surface); text-align: center; }
+    .contact-inner { max-width: 600px; margin: 0 auto; }
+    .contact .section-title { margin-bottom: 1rem; }
+    .contact-desc { color: var(--muted); line-height: 1.75; margin-bottom: 2.5rem; }
+
+    .contact-links {
+      display: flex; gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 2.5rem;
+    }
+
+    .contact-link {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.6rem 1.25rem;
+      border: 1px solid #2a2a2a;
+      border-radius: 2px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.8rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: all 0.2s;
+    }
+    .contact-link:hover { border-color: var(--accent); color: var(--accent); }
+
+    footer {
+      padding: 2rem 4rem;
+      border-top: 1px solid #1f1f1f;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    footer p { font-size: 0.75rem; color: #444; }
+
+    @media (max-width: 768px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { gap: 1.5rem; }
+      .hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 3rem; }
+      .hero-photo { display: none; }
+      section { padding: 4rem 1.5rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#" class="nav-logo">Roid Pérez</a>
+    <ul class="nav-links">
+      <li><a href="#sobre-mi">Sobre mí</a></li>
+      <li><a href="#proyectos">Proyectos</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-text">
+      <p class="hero-label">Estudiante de Ingeniería en Software</p>
+      <h1>Hola, soy<br/><em>Roid Pérez</em></h1>
+      <p class="hero-desc">
+        Estudiante de Ingeniería en Software apasionado por el desarrollo web. Construyendo mis primeros proyectos y aprendiendo cada día a crear experiencias digitales.
+      </p>
+      <div class="hero-btns">
+        <a href="#proyectos" class="btn btn-primary">Ver mis proyectos</a>
+        <a href="#contacto" class="btn btn-outline">Contáctame</a>
+      </div>
+    </div>
+    <div class="hero-photo">
+      <div class="photo-frame">
+        <div class="photo-icon">👨‍💻</div>
+        <!-- ✏️ Reemplaza con tu foto:
+             <img src="foto.jpg" style="width:100%;height:100%;object-fit:cover;" /> -->
+        <p class="photo-hint">Agrega tu foto con &lt;img src="foto.jpg"&gt;</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="about" id="sobre-mi">
+    <p class="section-label">Sobre mí</p>
+    <div class="about-grid">
+      <div class="about-text">
+        <h2 class="section-title">Un poco<br/>sobre mí</h2>
+        <p>Soy Roid Alexander Pérez Ramírez, estudiante de Ingeniería en Software con ganas de aprender y construir cosas útiles con código.</p>
+        <p>Actualmente estoy dando mis primeros pasos en el desarrollo web — HTML, CSS y JavaScript — y este portafolio es la prueba de ello.</p>
+        <p>Me apasiona entender cómo funcionan las cosas por dentro y crear soluciones que la gente pueda usar de verdad.</p>
+      </div>
+      <div>
+        <h3 style="font-family: var(--serif); font-size: 1.4rem; margin-bottom: 1.5rem;">Habilidades</h3>
+        <div class="skills-list">
+          <div class="skill-item">
+            <div class="skill-name">HTML</div>
+            <div class="skill-level">Aprendiendo</div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-name">CSS</div>
+            <div class="skill-level">Aprendiendo</div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-name">JavaScript</div>
+            <div class="skill-level">Próximamente</div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-name">Git</div>
+            <div class="skill-level">Próximamente</div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-name">Linux</div>
+            <div class="skill-level">En uso</div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-name">VS Code</div>
+            <div class="skill-level">En uso</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="proyectos">
+    <p class="section-label">Proyectos</p>
+    <h2 class="section-title">Lo que he<br/>construido</h2>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-thumb">🌐</div>
+        <div class="project-body">
+          <p class="project-tag">HTML / CSS</p>
+          <h3 class="project-title">Portafolio Personal</h3>
+          <p class="project-desc">Mi primer proyecto web. Diseñado y construido desde cero para aprender HTML y CSS mientras me presento al mundo.</p>
+          <a href="#" class="project-link">Ver proyecto →</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-thumb">📝</div>
+        <div class="project-body">
+          <p class="project-tag">Próximo proyecto</p>
+          <h3 class="project-title">Proyecto #2</h3>
+          <p class="project-desc">En construcción. Sigo aprendiendo y pronto tendré algo nuevo que mostrar aquí.</p>
+          <a href="#" class="project-link">Ver proyecto →</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-thumb">🚀</div>
+        <div class="project-body">
+          <p class="project-tag">Próximo proyecto</p>
+          <h3 class="project-title">Proyecto #3</h3>
+          <p class="project-desc">Cada proyecto es una oportunidad para aplicar lo aprendido. Stay tuned.</p>
+          <a href="#" class="project-link">Ver proyecto →</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="contact" id="contacto">
+    <div class="contact-inner">
+      <p class="section-label">Contacto</p>
+      <h2 class="section-title">¿Hablamos?</h2>
+      <p class="contact-desc">
+        Estoy abierto a colaboraciones, proyectos y cualquier oportunidad para seguir aprendiendo. No dudes en escribirme.
+      </p>
+      <a href="mailto:roidperezr@gmail.com" class="btn btn-primary">roidperezr@gmail.com</a>
+      <div class="contact-links">
+        <a href="https://github.com/" class="contact-link" target="_blank">GitHub</a>
+        <a href="https://linkedin.com/" class="contact-link" target="_blank">LinkedIn</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Roid Alexander Pérez Ramírez</p>
+    <p>Hecho con HTML & CSS ✦</p>
+  </footer>
+
+</body>
+</html>
